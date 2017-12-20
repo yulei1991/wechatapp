@@ -1,0 +1,9 @@
+/* pages/tips/tips.wxss */
+.tip-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.tip-item {
+  margin: 10rpx;
+}

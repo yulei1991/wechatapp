@@ -1,0 +1,7 @@
+<!--pages/tips/tips.wxml-->
+<!-- <text>pages/tips/tips.wxml</text> -->
+<view class="container tip-list">
+  <block wx:for="{{tips}}" wx:for-item="tip">
+    <text class="tip-item">{{tip}}</text>
+  </block>
+</view>
