@@ -10,4 +10,7 @@
   <view class="usermotto">
     <text bindtap='bindViewTips' class="user-motto">{{motto}}</text>
   </view>
+  <view class="">
+    <text bindtap='goToPoker' class="user-motto">Poker</text>
+  </view>
 </view>

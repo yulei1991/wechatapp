@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/tips/tips"
+    "pages/tips/tips",
+    "pages/poker/poker"
   ],
   "window": {
     "backgroundTextStyle": "light",

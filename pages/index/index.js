@@ -55,5 +55,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  goToPoker: function(e){
+    wx.navigateTo({
+      url: '../poker/poker',
+    })
   }
 })
