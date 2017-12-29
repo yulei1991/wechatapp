@@ -1,1 +1,119 @@
 /* pages/poker/poker.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 32rpx;
+  background-color: #EFEFEF;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+
+.page-container{
+  min-height: 100vh;
+  background-image: linear-gradient(0deg,#4c1177 0,#4416a1 73%);
+}
+
+/*------------header------------*/
+.header {padding:18rpx;margin:0;flex-direction:row;display:flex;}
+.points {color:#fff;align-self:left;flex:1;font-size:34rpx;}
+.btn-group {display:flex;flex-direction:row;min-height:50rpx;line-height:50rpx;}
+.logout {background:#ccc;color:#fff;width:104rpx;}
+.go {background:#ed2776;color:#fff;width:100rpx;}
+.scrum-btn {text-align:center;margin:0 10rpx;padding:0 18rpx;font-size:30rpx;}
+
+/*------------list------------*/
+.list{
+  box-sizing: border-box; 
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around;  
+  overflow-y: scroll; 
+  perspective: 1600rpx; 
+  flex-direction: row;
+  align-items: center;
+}
+
+.card{
+  width: 45vw;  
+  height: 18vh;
+  border-radius:10.7rpx; 
+  display: flex; 
+  margin: 9rpx;
+
+
+  position: relative;
+
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.65);
+  color: #fff;
+  text-align: center;
+  align-items: center;
+  font-size: 148rpx;
+
+  transition: transform 1s,-webkit-transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card .figure{
+  width: 100%; 
+  height: 100%;
+  position: absolute; 
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  backface-visibility: hidden;
+}
+
+.card .back{
+    transform: rotateY(180deg) translateZ(1px);
+    height: 100%;
+    width: 100%;
+}
+
+.card .back .num{
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: .15;
+  font-size: 120%;
+  line-height: 120%;
+}
+
+.card .back .yes{
+  width: 74rpx;
+  height: 74rpx;
+  content: "";
+  border: 6rpx solid #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50%;
+}
+
+.card .back .yes::before{
+  content: "";
+  width: 31rpx;
+  height: 10rpx;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;  
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+
+.flipped {
+  transform: rotateY(180deg) translateZ(1px);
+}
+
+.bg1{background-image: linear-gradient(to left bottom,#43baff 0,#2bd1ff);}
+.bg2{background-image: linear-gradient(to left bottom,#ff599e 0,#ffac68);}
+.bg3{background: linear-gradient(45deg,#5983ff,#ff68f8);}
