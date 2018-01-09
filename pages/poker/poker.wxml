@@ -5,36 +5,15 @@
     <text class='points'>Your Points: {{point}}</text>
     <view class='btn-group'>
       <view class='logout scrum-btn'>Logout</view>
-      <view class='go scrum-btn'>Go!</view>
+      <view class='go scrum-btn' bindtap='submit'>Go!</view>
     </view>
   </view>
   <view class='list'>
-    <view class='card bg1'>
-      <view class='figure'>1</view>
-        <view class='figure back'>
-          <view class='num'>1</view>
-          <view class='yes'></view>
-      </view>  
-    </view>
-    <view class='card bg2 flipped'>
-      <view class='figure'>2</view>
+    <view wx:for="{{cardPoints}}" wx:key='*this' class='card bg{{item}} {{selectedCard==item?"flipped":""}}' bindtap='clickCard' data-value='{{item}}'>
+      <view class='figure'>{{item}}</view>
       <view class='figure back'>
-          <view class='num'>2</view>
-          <view class='yes'></view>
-      </view>
-    </view>
-    <view class='card bg3'>
-      <view class='figure'>3</view>
-      <view class='figure back'>
-          <view class='num'>3</view>
-          <view class='yes'></view>
-      </view>
-    </view>
-    <view class='card bg1'>
-      <view class='figure'>4</view>
-      <view class='figure back'>
-          <view class='num'>4</view>
-          <view class='yes'></view>
+        <view class='num'>{{item}}</view>
+        <view class='yes'></view>
       </view>
     </view>
   </view> 

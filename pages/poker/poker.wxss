@@ -114,6 +114,7 @@ page {
   transform: rotateY(180deg) translateZ(1px);
 }
 
-.bg1{background-image: linear-gradient(to left bottom,#43baff 0,#2bd1ff);}
+.bg1{background-image: linear-gradient(to left bottom,#43baff 0,#2bd1ff);} 
 .bg2{background-image: linear-gradient(to left bottom,#ff599e 0,#ffac68);}
 .bg3{background: linear-gradient(45deg,#5983ff,#ff68f8);}
+.bg5{background-image: linear-gradient(to left bottom,#ff599e 0,#ffac68);}
