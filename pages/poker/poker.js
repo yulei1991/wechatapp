@@ -1,4 +1,6 @@
 // pages/poker/poker.js
+const app = getApp()
+
 Page({
 
   /**
@@ -15,7 +17,45 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (app.globalData.userInfo) {
+      console.log(app)
+      wx.showModal({
+        title: '提示',
+        content: app.globalData.userInfo.nickName,
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            // console.log('用户点击确定')
+          } else if (res.cancel) {
+            // console.log('用户点击取消')
+          }
+        }
+      })    
+    }else{
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo;
+          wx.showModal({
+            title: '提示',
+            content: app.globalData.userInfo.nickName,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                // console.log('用户点击确定')
+              } else if (res.cancel) {
+                // console.log('用户点击取消')
+              }
+            }
+          })    
+        },
+        fail:res=>{
+          console.log(res)
+          wx.navigateTo({
+            url: '../logs/logs',
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -96,6 +136,10 @@ Page({
         }
       })
     }else{
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      })
       this.vote(finalPoint);
     }
   },
@@ -109,6 +153,7 @@ Page({
         $this.data.voteSuccess = true;
       },
       complete: function(res){
+        wx.hideLoading();
         wx.showModal({
           title: '提示',
           content: $this.data.voteSuccess ? '出牌成功，点数为' + point : '出牌失败，请重试',
