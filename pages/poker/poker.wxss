@@ -35,7 +35,7 @@ page {
 
 .card{
   width: 45vw;  
-  height: 18vh;
+  height: 17vh;
   border-radius:10.7rpx; 
   display: flex; 
   margin: 9rpx;
@@ -114,7 +114,6 @@ page {
   transform: rotateY(180deg) translateZ(1px);
 }
 
-.bg1{background-image: linear-gradient(to left bottom,#43baff 0,#2bd1ff);} 
-.bg2{background-image: linear-gradient(to left bottom,#ff599e 0,#ffac68);}
-.bg3{background: linear-gradient(45deg,#5983ff,#ff68f8);}
-.bg5{background-image: linear-gradient(to left bottom,#ff599e 0,#ffac68);}
+.bg1, .bg2, .bg3, .bg4 {background-image: linear-gradient(to left bottom,#43baff 0,#2bd1ff);} 
+.bg5, .bg6, .bg7, .bg8 {background-image: linear-gradient(to left bottom,#ff599e 0,#ffac68);}
+.bg9, .bg10 {background: linear-gradient(45deg,#5983ff,#ff68f8);}

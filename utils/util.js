@@ -14,6 +14,15 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const mAlert = content => {
+  wx.showModal({
+    title: '提示',
+    content: content,
+    showCancel: false
+  })
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  mAlert: mAlert
 }

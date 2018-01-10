@@ -1,5 +1,6 @@
 // pages/poker/poker.js
 const app = getApp()
+const util = require('../../utils/util.js')
 
 Page({
 
@@ -8,9 +9,10 @@ Page({
    */
   data: {
     point: 0,
-    cardPoints: [1,2,3,5],
+    cardPoints: [1,2,3,5,8,13,20,50,100],
     selectedCard: 0,
-    voteSuccess: false
+    voteSuccess: false,
+    roomid: '123'
   },
 
   /**
@@ -18,38 +20,14 @@ Page({
    */
   onLoad: function (options) {
     if (app.globalData.userInfo) {
-      console.log(app)
-      wx.showModal({
-        title: '提示',
-        content: app.globalData.userInfo.nickName,
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            // console.log('用户点击确定')
-          } else if (res.cancel) {
-            // console.log('用户点击取消')
-          }
-        }
-      })    
+      util.mAlert(app.globalData.userInfo.nickName)
     }else{
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo;
-          wx.showModal({
-            title: '提示',
-            content: app.globalData.userInfo.nickName,
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                // console.log('用户点击确定')
-              } else if (res.cancel) {
-                // console.log('用户点击取消')
-              }
-            }
-          })    
+          util.mAlert(app.globalData.userInfo.nickName)
         },
         fail:res=>{
-          console.log(res)
           wx.navigateTo({
             url: '../logs/logs',
           })
@@ -111,11 +89,12 @@ Page({
     let currentPoint = e.currentTarget.dataset.value;
     if(this.data.selectedCard==currentPoint){
       this.setData({
-        selectedCard: 0
+        selectedCard: 0,
+        point: 0
       })
     }else{
       this.setData({
-        point: currentPoint,
+        point: currentPoint < 0?0: currentPoint,
         selectedCard: currentPoint
       })
     }
@@ -123,18 +102,7 @@ Page({
   submit:function(e){
     let finalPoint = this.data.selectedCard;
     if (finalPoint==0){
-      wx.showModal({
-        title: '提示',
-        content: '请选择一张卡片',
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            // console.log('用户点击确定')
-          } else if (res.cancel) {
-            // console.log('用户点击取消')
-          }
-        }
-      })
+      util.mAlert('请选择一张卡片')
     }else{
       wx.showLoading({
         title: '加载中',
@@ -143,29 +111,43 @@ Page({
       this.vote(finalPoint);
     }
   },
+  logout: function(){
+    let $this = this;
+    let name = app.globalData.userInfo.nickName;
+    let url = app.globalData.userInfo.avatarUrl;
+    wx.request({
+      url: 'https://m.ctrip.com/restapi/soa2/14160/scrumVote',
+      data: {
+        "roomid": $this.data.roomid,
+        "name": name,
+        "url": url,
+        "leave": true
+      },
+      method: 'POST',
+      success: function (res) {
+        wx.navigateBack()
+      }
+    })
+  },
   vote: function(point){
     let $this = this;
+    let name = app.globalData.userInfo.nickName;
+    let url = app.globalData.userInfo.avatarUrl;
     wx.request({
-      url: 'https://m.ctrip.com/restapi/soa2/10934/hotel/customer/getmarquees',
-      data: { "alliance": { "ishybrid": 0 }, "head": { "cid": point, "ctok": "", "cver": "1.0", "lang": "01", "sid": "8888", "syscode": "09", "auth": null}, "contentType": "json" },
+      url: 'https://m.ctrip.com/restapi/soa2/14160/scrumVote',
+      data: {
+        "roomid": $this.data.roomid,
+        "name": name,
+        "url": url,
+        "point": point
+      },
       method: 'POST',
       success: function (res) {
         $this.data.voteSuccess = true;
       },
       complete: function(res){
         wx.hideLoading();
-        wx.showModal({
-          title: '提示',
-          content: $this.data.voteSuccess ? '出牌成功，点数为' + point : '出牌失败，请重试',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              // console.log('用户点击确定')
-            } else if (res.cancel) {
-              // console.log('用户点击取消')
-            }
-          }
-        })
+        util.mAlert($this.data.voteSuccess ? '出牌成功' : '出牌失败，请重试')
       }
     })
   }
