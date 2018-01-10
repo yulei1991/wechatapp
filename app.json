@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/room/list",
+    "pages/poker/poker",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/tips/tips",
-    "pages/poker/poker"
+    "pages/tips/tips"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,22 @@
+/* pages/room/list.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 32rpx;
+  background-color: #EFEFEF;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+
+.page-container{
+  min-height: 100vh;
+  background-image: linear-gradient(0deg,#4c1177 0,#4416a1 73%);
+}
+
+.header {padding:18rpx;margin:0;flex-direction:row;display:flex;}
+.room {color:#fff;align-self:left;flex:1;font-size:34rpx;height: 53rpx;text-align: center;}
+.room text {vertical-align: text-bottom;line-height: 53rpx;}
+.room-input {display:flex;flex-direction:row;height:53rpx;line-height:53rpx;}
+.input {background:#ccc;color:#fff;width:500rpx;align-self: left;height: 53rpx}
+.go {background:#ed2776;color:#fff;width:100rpx;height: 53rpx}
+.scrum-btn {text-align:center;margin:0 10rpx;padding:0 18rpx;font-size:30rpx;line-height: 53rpx}

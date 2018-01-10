@@ -1,0 +1,18 @@
+<!--pages/room/list.wxml-->
+<!-- <text>pages/room/list.wxml</text> -->
+<page>
+  <view class='page-container'>
+    <view class='header'>
+      <view class='room'><text>Find Room:</text></view>
+      <view class='room-input'>
+        <input class="input" name="input" placeholder="input room id" auto-focus bindconfirm='submit' bindblur='submit' />
+      </view>
+    </view>
+    <scroll-view>
+
+    </scroll-view>
+  </view>
+  <modal hidden="{{hiddenPassword}}" title="Room Password" confirm-text="submit" no-cancel bindconfirm="confirm">  
+    <input type='text'placeholder="input room password" bindconfirm='submitPassword' bindblur='submitPassword'/>  
+</modal>  
+</page>

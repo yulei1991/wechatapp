@@ -1,6 +1,7 @@
 // pages/poker/poker.js
 const app = getApp()
 const util = require('../../utils/util.js')
+const member = require('../../utils/member.js')
 
 Page({
 
@@ -12,20 +13,30 @@ Page({
     cardPoints: [1,2,3,5,8,13,20,50,100],
     selectedCard: 0,
     voteSuccess: false,
-    roomid: '123'
+    roomid: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let $this = this;
+    let storedPoint = wx.getStorageSync('cardpoint') | 0;
+    storedPoint = storedPoint == -2 ? 0 : storedPoint;
+    $this.data.point = storedPoint;
+    $this.data.roomid = options.roomid;
+    $this.setData({
+      selectedCard: storedPoint,
+      point: storedPoint
+    })
     if (app.globalData.userInfo) {
-      util.mAlert(app.globalData.userInfo.nickName)
+      member.login($this.roomid, app.globalData.userInfo.nickName, app.globalData.userInfo.avatarUrl)
+      // util.mAlert(app.globalData.userInfo.nickName)
     }else{
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo;
-          util.mAlert(app.globalData.userInfo.nickName)
+          // util.mAlert(app.globalData.userInfo.nickName)
         },
         fail:res=>{
           wx.navigateTo({
@@ -115,6 +126,7 @@ Page({
     let $this = this;
     let name = app.globalData.userInfo.nickName;
     let url = app.globalData.userInfo.avatarUrl;
+    wx.setStorageSync('cardpoint', -2)
     wx.request({
       url: 'https://m.ctrip.com/restapi/soa2/14160/scrumVote',
       data: {
@@ -131,6 +143,25 @@ Page({
   },
   vote: function(point){
     let $this = this;
+    if(!$this.data.roomid){
+      wx.hideLoading();
+      wx.showToast({
+        title: '请先选择房间！',
+        icon: 'loading',
+        mask: true,
+        complete: () => {
+          setTimeout(function () {
+            wx.hideToast()
+            wx.navigateTo({
+              url: '../room/list',
+            })
+          }, 1000)
+        }
+      })
+
+      return;
+    }
+    wx.setStorageSync('cardpoint', point)
     let name = app.globalData.userInfo.nickName;
     let url = app.globalData.userInfo.avatarUrl;
     wx.request({
