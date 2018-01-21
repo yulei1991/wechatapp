@@ -127,6 +127,7 @@ Page({
     let name = app.globalData.userInfo.nickName;
     let url = app.globalData.userInfo.avatarUrl;
     wx.setStorageSync('cardpoint', -2)
+    member.logout();
     wx.request({
       url: 'https://m.ctrip.com/restapi/soa2/14160/scrumVote',
       data: {

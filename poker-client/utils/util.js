@@ -1,3 +1,5 @@
+const config = require('../config');
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -22,7 +24,11 @@ const mAlert = content => {
   })
 }
 
+const getDomainUrl = config.env == 'dev' ? 'http://localhost:3000' : 'https://www.chunlianzhushou.com';
+
+
 module.exports = {
-  formatTime: formatTime,
-  mAlert: mAlert
+  formatTime,
+  mAlert,
+  getDomainUrl
 }

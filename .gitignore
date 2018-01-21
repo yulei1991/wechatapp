@@ -1,0 +1,40 @@
+# IntelliJ project files
+.idea
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea/workspace.xml
+rebel.xml
+target
+build/
+
+out
+gen
+catalina.home_IS_UNDEFINED
+log.server_IS_UNDEFINED
+
+# protobuf files
+*.proto
+
+# Maven
+target/
+*.ser
+*.ec
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# nodejs
+node_modules/
+/.idea
+assets/dist/
+!assets/dist/.ares/
+/npm-debug.log
+
+# sonar
+.sonar/
+
